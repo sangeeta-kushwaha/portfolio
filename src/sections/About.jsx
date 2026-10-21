@@ -1,37 +1,40 @@
 import { Section } from '../components/Section'
-import { Badge } from '../components/Badge'
 import { FadeIn, Stagger, StaggerItem } from '../components/Motion'
-import { profile, skillGroups } from '../data/profile'
+import { about } from '../data/profile'
 
 export default function About() {
   return (
     <Section
       id="about"
       eyebrow="About"
-      title="Interfaces that feel alive"
-      subtitle="I build clean, responsive React UIs with attention to motion, accessibility, and performance."
+      title="How I like to build"
+      subtitle={about.lead}
     >
-      <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
-        <FadeIn className="lg:col-span-7">
-          <p className="text-lg leading-relaxed text-ink-700 dark:text-ink-200">{profile.intro}</p>
-          <p className="mt-5 text-base leading-relaxed text-ink-600 dark:text-ink-300">
-            I focus on component-driven development, responsive layouts, and polishing interactions.
-            Comfortable translating designs into reusable UI and improving UX with small, thoughtful
-            details.
-          </p>
+      <div className="grid gap-6 lg:grid-cols-12">
+        <FadeIn className="panel rounded-[1.6rem] p-6 sm:p-8 lg:col-span-5">
+          <h3 className="font-display text-xl font-bold text-ink-950 dark:text-white">Approach</h3>
+          <p className="mt-4 text-base leading-relaxed text-ink-600 dark:text-ink-200">{about.approach}</p>
+          <h3 className="font-display mt-8 text-xl font-bold text-ink-950 dark:text-white">Interests</h3>
+          <ul className="mt-4 flex flex-wrap gap-2">
+            {about.interests.map((item) => (
+              <li
+                key={item}
+                className="rounded-full bg-brand-600/10 px-3 py-1.5 text-sm text-brand-900 dark:bg-brand-300/10 dark:text-brand-100"
+              >
+                {item}
+              </li>
+            ))}
+          </ul>
         </FadeIn>
 
-        <Stagger className="space-y-8 lg:col-span-5" faster>
-          {skillGroups.map((g) => (
-            <StaggerItem key={g.title}>
-              <h3 className="text-xs font-medium tracking-[0.18em] text-ink-400 uppercase">
-                {g.title}
-              </h3>
-              <div className="mt-3 flex flex-wrap gap-2">
-                {g.items.map((s) => (
-                  <Badge key={s}>{s}</Badge>
-                ))}
-              </div>
+        <Stagger className="grid gap-4 sm:grid-cols-3 lg:col-span-7 lg:grid-cols-1">
+          {about.strengths.map((item, index) => (
+            <StaggerItem key={item.title} className="panel rounded-[1.6rem] p-6">
+              <p className="text-xs font-medium tracking-[0.16em] text-brand-700 uppercase dark:text-brand-300">
+                0{index + 1}
+              </p>
+              <h3 className="font-display mt-3 text-xl font-bold text-ink-950 dark:text-white">{item.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-ink-600 dark:text-ink-200">{item.text}</p>
             </StaggerItem>
           ))}
         </Stagger>

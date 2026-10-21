@@ -1,71 +1,49 @@
-import { useRef } from 'react'
+import { Database, Monitor, Server, Wrench } from 'lucide-react'
 import { Section } from '../components/Section'
-import { Stagger, StaggerItem, CountUp } from '../components/Motion'
-import { gsap, useGSAP, prefersReducedMotion } from '../lib/gsap'
-import { skills } from '../data/profile'
+import { Stagger, StaggerItem } from '../components/Motion'
+import { skillGroups } from '../data/profile'
 
-function Bar({ level }) {
-  const ref = useRef(null)
-  const fillRef = useRef(null)
-
-  useGSAP(
-    () => {
-      if (!fillRef.current) return
-      if (prefersReducedMotion()) {
-        gsap.set(fillRef.current, { width: `${level}%` })
-        return
-      }
-
-      gsap.fromTo(
-        fillRef.current,
-        { width: '0%' },
-        {
-          width: `${Math.max(0, Math.min(100, level))}%`,
-          duration: 1.35,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: ref.current,
-            start: 'top 90%',
-            toggleActions: 'play none none none'
-          }
-        }
-      )
-    },
-    { dependencies: [level] }
-  )
-
-  return (
-    <div ref={ref} className="h-1.5 w-full overflow-hidden bg-ink-950/10 dark:bg-white/10">
-      <div ref={fillRef} className="relative h-full bg-brand-600 dark:bg-brand-400" />
-    </div>
-  )
+const ICONS = {
+  frontend: Monitor,
+  backend: Server,
+  database: Database,
+  tools: Wrench
 }
 
 export default function Skills() {
+  const groups = skillGroups.filter((group) => group.items?.length)
+
   return (
     <Section
       id="skills"
       eyebrow="Skills"
-      title="Tools in daily rotation"
-      subtitle="Always sharpening fundamentals while shipping polished interfaces."
+      title="Technologies I use"
+      subtitle="Grouped by where they show up in the projects I have actually built."
     >
-      <Stagger className="grid gap-6 sm:grid-cols-2">
-        {skills.map((s) => (
-          <StaggerItem
-            key={s.name}
-            className="border-b border-ink-950/10 pb-5 dark:border-white/10"
-          >
-            <div className="mb-3 flex items-baseline justify-between gap-3">
-              <div className="font-display text-lg font-semibold text-ink-950 dark:text-white">
-                {s.name}
+      <Stagger className="grid gap-4 sm:grid-cols-2">
+        {groups.map((group) => {
+          const Icon = ICONS[group.id] || Monitor
+          return (
+            <StaggerItem key={group.id} className="panel rounded-[1.6rem] p-6">
+              <div className="flex items-center gap-3">
+                <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-brand-600/10 text-brand-800 dark:bg-brand-300/10 dark:text-brand-100">
+                  <Icon className="h-4 w-4" aria-hidden="true" />
+                </span>
+                <h3 className="font-display text-xl font-bold text-ink-950 dark:text-white">{group.title}</h3>
               </div>
-              <div className="text-sm tabular-nums text-ink-500 dark:text-ink-300">
-                <CountUp to={s.level} />%
-              </div>
-            </div>
-            <Bar level={s.level} />
-          </StaggerItem>
-        ))}
+              <ul className="mt-5 flex flex-wrap gap-2">
+                {group.items.map((item) => (
+                  <li
+                    key={item}
+                    className="rounded-full border border-ink-950/10 bg-white/70 px-3 py-1.5 text-sm text-ink-700 dark:border-white/10 dark:bg-white/5 dark:text-ink-100"
+                  >
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </StaggerItem>
+          )
+        })}
       </Stagger>
     </Section>
   )

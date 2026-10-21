@@ -1,16 +1,8 @@
 import { useRef } from 'react'
 import { gsap, useGSAP, prefersReducedMotion } from '../lib/gsap'
+import { skillGroups } from '../data/profile'
 
-const DEFAULT_ITEMS = [
-  'React',
-  'JavaScript',
-  'Tailwind',
-  'Vite',
-  'Accessibility',
-  'Performance',
-  'TypeScript',
-  'Responsive UI'
-]
+const DEFAULT_ITEMS = [...new Set(skillGroups.flatMap((group) => group.items))]
 
 export function Marquee({ items = DEFAULT_ITEMS }) {
   const trackRef = useRef(null)
@@ -42,7 +34,7 @@ export function Marquee({ items = DEFAULT_ITEMS }) {
   )
 
   return (
-    <div className="relative overflow-hidden border-y border-ink-950/10 py-4 dark:border-white/10">
+    <div className="relative max-w-full overflow-hidden border-y border-ink-950/10 py-4 dark:border-white/10">
       <div ref={trackRef} className="flex w-max gap-10 will-change-transform">
         {row.map((item, i) => (
           <span

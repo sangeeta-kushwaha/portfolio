@@ -7,75 +7,38 @@
     <title>Sangeeta Kushwaha — Frontend Developer</title>
     <meta
       name="description"
-      content="Animated portfolio of Sangeeta Kushwaha — frontend developer building fast, accessible React interfaces."
+      content="Portfolio of Sangeeta Kushwaha, a frontend developer building responsive, accessible interfaces with React and JavaScript."
     />
     <meta name="theme-color" content="#12122a" />
-
+    <meta property="og:title" content="Sangeeta Kushwaha — Frontend Developer" />
+    <meta
+      property="og:description"
+      content="Selected React projects, skills, and a working contact form."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/favicon.svg" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Sangeeta Kushwaha — Frontend Developer" />
+    <meta
+      name="twitter:description"
+      content="Selected React projects, skills, and a working contact form."
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Syne:wght@500;600;700;800&display=swap"
       rel="stylesheet"
     />
-
-    <!-- Open Graph -->
-    <meta property="og:title" content="Sangeeta Kushwaha — Frontend Developer" />
-    <meta
-      property="og:description"
-      content="Projects, skills, and experience — built with React + Tailwind."
-    />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="/favicon.svg" />
-
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Sangeeta Kushwaha — Frontend Developer" />
-    <meta
-      name="twitter:description"
-      content="Animated frontend portfolio with React, Tailwind, and Framer Motion."
-    />
-
-    <!-- Tailwind (CDN). If npm registry works later, switch to local Tailwind build. -->
-    <script src="https://cdn.tailwindcss.com"></script>
     <script>
-      tailwind.config = {
-        darkMode: 'class',
-        theme: {
-          extend: {
-            fontFamily: {
-              display: ['Syne', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-              sans: ['Outfit', 'ui-sans-serif', 'system-ui', 'sans-serif']
-            },
-            colors: {
-              ink: {
-                50: '#f4f5fb',
-                100: '#e6e8f5',
-                200: '#c9cdea',
-                300: '#a5aad4',
-                400: '#7d84b8',
-                500: '#6268a0',
-                600: '#4e5286',
-                700: '#40436d',
-                800: '#37395a',
-                900: '#31334d',
-                950: '#12122a'
-              },
-              brand: {
-                50: '#f2f1ff',
-                100: '#e8e5ff',
-                200: '#d4cfff',
-                300: '#b5acff',
-                400: '#9380ff',
-                500: '#7a5ff7',
-                600: '#6d5ef5',
-                700: '#5840db',
-                800: '#4835b0',
-                900: '#3c2f8c'
-              }
-            }
-          }
-        }
-      }
+      ;(function () {
+        try {
+          var saved = localStorage.getItem('portfolio.theme')
+          var dark =
+            saved === 'dark' ||
+            (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)
+          if (dark) document.documentElement.classList.add('dark')
+        } catch (e) {}
+      })()
     </script>
   </head>
   <body>

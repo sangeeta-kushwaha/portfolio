@@ -68,7 +68,7 @@ const SHAPES = [
     id: 'pill-ui',
     className:
       'right-[8%] top-[42%] hidden rounded-full border border-brand-600/20 bg-white/70 px-3 py-1.5 text-xs font-medium text-ink-700 shadow-sm backdrop-blur-md sm:block dark:border-white/10 dark:bg-white/10 dark:text-ink-200',
-    label: 'UI Motion',
+    label: 'JavaScript',
     dur: 6.5,
     y: -20,
     x: -12,

@@ -4,7 +4,7 @@ import { cn } from '../utils/cn'
 
 export function Section({ id, eyebrow, title, subtitle, children, className }) {
   return (
-    <section id={id} className={cn('relative py-20 sm:py-28', className)}>
+    <section id={id} className={cn('relative scroll-mt-24 py-20 sm:py-28', className)}>
       <Container>
         {(eyebrow || title || subtitle) && (
           <header className="mb-12 max-w-3xl">

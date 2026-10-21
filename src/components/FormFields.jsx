@@ -1,35 +1,54 @@
 import { cn } from '../utils/cn'
 
-export function Input({ label, error, className, ...props }) {
-  return (
-    <label className="block">
-      <span className="text-sm font-medium text-ink-900 dark:text-white">{label}</span>
-      <input
-        className={cn(
-          'mt-2 h-11 w-full border border-ink-950/15 bg-white/60 px-3 text-sm text-ink-950 outline-none transition focus:border-brand-600 focus:ring-2 focus:ring-brand-500/20 dark:border-white/15 dark:bg-white/5 dark:text-white dark:focus:border-brand-400',
-          error && 'border-red-400 focus:border-red-500 focus:ring-red-500/20',
-          className
-        )}
-        {...props}
-      />
-      {error && <p className="mt-2 text-xs font-medium text-red-600 dark:text-red-400">{error}</p>}
-    </label>
+function fieldClass(error) {
+  return cn(
+    'mt-2 w-full rounded-2xl border border-ink-950/12 bg-white/80 px-3 text-sm text-ink-950 outline-none transition placeholder:text-ink-400 focus:border-brand-600 dark:border-white/12 dark:bg-white/5 dark:text-white dark:placeholder:text-ink-400 dark:focus:border-brand-300',
+    error && 'border-red-500 focus:border-red-500'
   )
 }
 
-export function Textarea({ label, error, className, ...props }) {
+export function Input({ id, label, error, className, ...props }) {
+  const errorId = id && error ? `${id}-error` : undefined
   return (
-    <label className="block">
-      <span className="text-sm font-medium text-ink-900 dark:text-white">{label}</span>
-      <textarea
-        className={cn(
-          'mt-2 min-h-[140px] w-full resize-y border border-ink-950/15 bg-white/60 px-3 py-3 text-sm text-ink-950 outline-none transition focus:border-brand-600 focus:ring-2 focus:ring-brand-500/20 dark:border-white/15 dark:bg-white/5 dark:text-white dark:focus:border-brand-400',
-          error && 'border-red-400 focus:border-red-500 focus:ring-red-500/20',
-          className
-        )}
+    <div>
+      <label htmlFor={id} className="text-sm font-medium text-ink-900 dark:text-white">
+        {label}
+      </label>
+      <input
+        id={id}
+        aria-invalid={error ? 'true' : 'false'}
+        aria-describedby={errorId}
+        className={cn(fieldClass(error), 'h-11', className)}
         {...props}
       />
-      {error && <p className="mt-2 text-xs font-medium text-red-600 dark:text-red-400">{error}</p>}
-    </label>
+      {error && (
+        <p id={errorId} className="mt-2 text-xs font-medium text-red-700 dark:text-red-300">
+          {error}
+        </p>
+      )}
+    </div>
+  )
+}
+
+export function Textarea({ id, label, error, className, ...props }) {
+  const errorId = id && error ? `${id}-error` : undefined
+  return (
+    <div>
+      <label htmlFor={id} className="text-sm font-medium text-ink-900 dark:text-white">
+        {label}
+      </label>
+      <textarea
+        id={id}
+        aria-invalid={error ? 'true' : 'false'}
+        aria-describedby={errorId}
+        className={cn(fieldClass(error), 'min-h-36 resize-y py-3', className)}
+        {...props}
+      />
+      {error && (
+        <p id={errorId} className="mt-2 text-xs font-medium text-red-700 dark:text-red-300">
+          {error}
+        </p>
+      )}
+    </div>
   )
 }
